@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">WeatherApplication</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="my_icon_key">
+        <item>01n</item>
+        <item>02n</item>
+        <item>03n</item>
+        <item>04n</item>
+        <item>09n</item>
+        <item>10n</item>
+        <item>11n</item>
+        <item>13n</item>
+        <item>50n</item>
+
+        <item>01d</item>
+        <item>02d</item>
+        <item>03d</item>
+        <item>04d</item>
+        <item>09d</item>
+        <item>10d</item>
+        <item>11d</item>
+        <item>13d</item>
+        <item>50d</item>
+    </string-array>
+    <string-array name="my_icon_values">
+        <item>@string/wi_night_clear</item>
+        <item>@string/wi_night_alt_cloudy</item>
+        <item>@string/wi_night_alt_partly_cloudy</item>
+        <item>@string/wi_night_cloudy_gusts</item>
+        <item>@string/wi_night_showers</item>
+        <item>@string/wi_night_rain</item>
+        <item>@string/wi_night_alt_thunderstorm</item>
+        <item>@string/wi_night_snow</item>
+        <item>@string/wi_night_fog</item>
+
+        <item>@string/wi_day_sunny</item>
+        <item>@string/wi_day_cloudy</item>
+        <item>@string/wi_wu_partlycloudy</item>
+        <item>@string/wi_day_cloudy_gusts</item>
+        <item>@string/wi_day_showers</item>
+        <item>@string/wi_day_rain</item>
+        <item>@string/wi_day_thunderstorm</item>
+        <item>@string/wi_day_snow</item>
+        <item>@string/wi_day_fog</item>
+
+    </string-array>
+    <string name="title_activity_cities_avtivity">CitiesAvtivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_cities">CitiesActivity</string>
+
+</resources>
