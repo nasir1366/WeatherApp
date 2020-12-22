@@ -9,11 +9,17 @@ import com.learn.weatherapplication.data.CityDbHelper;
 import com.learn.weatherapplication.data.CityModel;
 import com.learn.weatherapplication.data.WeatherData;
 
+import org.json.JSONObject;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Converter;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -23,6 +29,7 @@ import retrofit2.http.Url;
 public class APIManager{
     private static final String BASE_URL = "http://api.openweathermap.org/data/2.5/";
     private ServiceAPI serviceAPI;
+    private ServiceAPINoConverter serviceAPINoConverter;
     private Context context;
 
     public APIManager(Context context){
@@ -68,6 +75,26 @@ public class APIManager{
         serviceAPI = retrofit.create(ServiceAPI.class);
 
         return serviceAPI;
+    }
+
+
+    public interface ServiceAPINoConverter{
+
+        @GET()
+        Call<JSONObject> getWeatherData(@Url String url);
+
+    }
+
+    public ServiceAPINoConverter getAPIServiceNoConverter(){
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(new MyConverter())
+                .build();
+
+        serviceAPINoConverter = retrofit.create(ServiceAPINoConverter.class);
+
+        return serviceAPINoConverter;
     }
 
 

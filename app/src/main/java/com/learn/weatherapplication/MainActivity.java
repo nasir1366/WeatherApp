@@ -22,6 +22,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 import com.learn.weatherapplication.data.CityDbHelper;
 import com.learn.weatherapplication.data.CityModel;
 import com.learn.weatherapplication.data.CityWeatherInfo;
@@ -36,6 +38,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 
@@ -77,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
         Log.i("weather", "onResume");
         super.onResume();
 //        loadWeatherData();
-        loadWeatherDataRetrofit();
+//        loadWeatherDataRetrofit();
+        loadWeatherDataRetrofitNoConverter();
 //        updateHandler.post(runnable);
     }
 
@@ -206,6 +210,40 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<WeatherData> call, Throwable t) {
                 pb.setVisibility(View.INVISIBLE);
                 Log.i("retrofit" , t.getMessage());
+
+            }
+        });
+
+    }
+
+    private void loadWeatherDataRetrofitNoConverter(){
+        pb.setVisibility(View.VISIBLE);
+
+        String url = apiManager.prepareUrl();
+        Log.i("retrofit" , "url : "+ url);
+
+        Call<JSONObject> call = apiManager.getAPIServiceNoConverter().getWeatherData(url);
+        call.enqueue(new Callback<JSONObject>() {
+            @Override
+            public void onResponse(Call<JSONObject> call, retrofit2.Response<JSONObject> response) {
+                Log.i("retrofit" , "response :"+ response.body().toString());
+                if(response.isSuccessful()){
+                    parseWeatherJson(response.body());
+
+                }
+                else{
+                    try {
+                        Log.i("retrofit" , response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                pb.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onFailure(Call<JSONObject> call, Throwable t) {
+                Log.i("retrofit error", t.getMessage());
 
             }
         });
